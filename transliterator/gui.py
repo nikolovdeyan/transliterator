@@ -1,7 +1,7 @@
 """
 A GUI for the transliterator based on PySimpleGUI.
 """
-
+import os
 from trans import transliterate
 import PySimpleGUI as sg
 import logging
@@ -32,7 +32,11 @@ def launch_gui():
 
         if event == "Transliterate":
             cyrillic_text = values["-BG TEXT-"]
-            transliterated_text = transliterate(cyrillic_text)
+            transliterated_lines = []
+            for line in cyrillic_text.splitlines():
+                transliterated_line = transliterate(line)
+                transliterated_lines.append(transliterated_line)
+            transliterated_text = "\n".join(transliterated_lines)
             window['-ENG TEXT-'].update(transliterated_text)
 
     window.close()
