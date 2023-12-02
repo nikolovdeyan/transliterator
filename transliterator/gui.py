@@ -15,7 +15,7 @@ sg.SetOptions (
 )
 
 WIN_WIDTH = 950
-WIN_HEIGHT = 800
+WIN_HEIGHT = 750
 
 def make_window():
     sg.theme(sg.user_settings_get_entry("theme", None))
@@ -23,8 +23,8 @@ def make_window():
         [sg.Menu([["File", ["Theme", "Exit"]], ["Help", "About"],])],
         [sg.Push(), sg.Text("Transliterator", size=(16,1), font=("Helvetica", 16, "bold")), sg.Push()],
         [sg.Text("Place your cyrillic text here and press <Transliterate>")],
-        [sg.Multiline(size=(80,15), key="-BG TEXT-", autoscroll=True)],
-        [sg.Multiline(size=(80,15), key="-EN TEXT-", autoscroll=True)],
+        [sg.Multiline(size=(70,12), key="-BG TEXT-", autoscroll=True)],
+        [sg.Multiline(size=(70,12), key="-EN TEXT-", autoscroll=True)],
         [sg.Button("Transliterate", s=9), sg.Button("Copy"), sg.Button("Clear", s=9), sg.Button("Exit", s=9)],
     ]
     return sg.Window("Transliterator", layout, keep_on_top=True, finalize=True)

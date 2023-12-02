@@ -14,34 +14,41 @@ def transliterate(text: str) -> str:
     bg_ch_basic = ("абвгдезийклмнопрстфхуАБВГДЕЗИЙКЛМНОПРСТФХУ",
                    "abvgdeziyklmnoprstfhuABVGDEZIYKLMNOPRSTFHU")
     bg_ch_composite = {
-        'ж': 'zh',
-        'ц': 'ts',
-        'ч': 'ch',
-        'ш': 'sh',
-        'щ': 'sht',
-        'ъ': 'a',
-        'ь': 'y',
-        'ю': 'yu',
-        'я': 'ya',
-        'Ж': 'Zh',
-        'Ц': 'Ts',
-        'Ч': 'Ch',
-        'Ш': 'Sh',
-        'Щ': 'Sht',
-        'Ъ': 'A',
-        'Ь': 'Y',
-        'Ю': 'Yu',
-        'Я': 'Ya',
+        "ж": "zh",
+        "ц": "ts",
+        "ч": "ch",
+        "ш": "sh",
+        "щ": "sht",
+        "ъ": "a",
+        "ь": "y",
+        "ю": "yu",
+        "я": "ya",
+        "Ж": "Zh",
+        "Ц": "Ts",
+        "Ч": "Ch",
+        "Ш": "Sh",
+        "Щ": "Sht",
+        "Ъ": "A",
+        "Ь": "Y",
+        "Ю": "Yu",
+        "Я": "Ya",
+    }
+
+    special_cases = {
+        "България": "Bulgaria",
     }
 
     basic_chars = str.maketrans(*bg_ch_basic)
     composite_chars = str.maketrans(bg_ch_composite)
     transl_table = {**basic_chars, **composite_chars}
 
-    transl_raw = [w.translate(transl_table) for w in text.split()]
+    # Handle words that are special cases:
+    transl_raw = [special_cases.get(w) if w in special_cases else w for w in text.split()]
 
-    # Handle words that end in 'iya' -> 'ia'
-    transl_list = [w[:-3]+'ia' if w[-3:] == 'iya' else w for w in transl_raw]
+    transl_raw = [w.translate(transl_table) for w in transl_raw]
 
-    translation = ' '.join(transl_list)
+    # Handle words that end with "iya":
+    transl_list = [w[:-3]+"ia" if w[-3:] == "iya" else w for w in transl_raw]
+
+    translation = " ".join(transl_list)
     return translation
