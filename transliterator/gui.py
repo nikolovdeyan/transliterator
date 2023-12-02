@@ -21,10 +21,11 @@ def make_window():
     sg.theme(sg.user_settings_get_entry("theme", None))
     layout = [
         [sg.Menu([["File", ["Theme", "Exit"]], ["Help", "About"],])],
-        [sg.Text("Transliterator")],
+        [sg.Push(), sg.Text("Transliterator", size=(16,1), font=("Helvetica", 16, "bold")), sg.Push()],
+        [sg.Text("Place your cyrillic text here and press <Transliterate>")],
         [sg.Multiline(size=(80,15), key="-BG TEXT-", autoscroll=True)],
         [sg.Multiline(size=(80,15), key="-EN TEXT-", autoscroll=True)],
-        [sg.Button("Transliterate"), sg.Button("Clear"), sg.Button("Exit")],
+        [sg.Button("Transliterate", s=9), sg.Button("Copy"), sg.Button("Clear", s=9), sg.Button("Exit", s=9)],
     ]
     return sg.Window("Transliterator", layout, keep_on_top=True, finalize=True)
 
@@ -45,6 +46,8 @@ def main():
                 transliterated_lines.append(transliterated_line)
             transliterated_text = "\n".join(transliterated_lines)
             window["-EN TEXT-"].update(transliterated_text)
+        if event == "Copy":
+            sg.clipboard_set(values["-EN TEXT-"])
         if event == "Clear":
             window["-EN TEXT-"].update("")
             window["-BG TEXT-"].update("")
