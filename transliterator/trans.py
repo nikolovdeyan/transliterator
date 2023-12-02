@@ -38,17 +38,26 @@ def transliterate(text: str) -> str:
         "България": "Bulgaria",
     }
 
+    # Prepare translation table
     basic_chars = str.maketrans(*bg_ch_basic)
     composite_chars = str.maketrans(bg_ch_composite)
     transl_table = {**basic_chars, **composite_chars}
 
-    # Handle words that are special cases:
-    transl_raw = [special_cases.get(w) if w in special_cases else w for w in text.split()]
+    # Handle new lines:
+    transliterated_lines = []
+    for line in text.splitlines():
+        print(f"Raw line {line}")
+        # Handle words that are special cases:
+        transl_raw = [special_cases.get(w) if w in special_cases else w for w in line.split()]
+        print(f"transl_raw: {transl_raw}")
+        # Translate words in line
+        transl_raw = [w.translate(transl_table) for w in transl_raw]
+        print(f"transl_raw: {transl_raw}")
+        # Handle words that end with "iya":
+        transl_list = [w[:-3]+"ia" if w[-3:] == "iya" else w for w in transl_raw]
+        print(f"transl_list: {transl_list}")
+        transliterated_lines.append(" ".join(transl_list))
 
-    transl_raw = [w.translate(transl_table) for w in transl_raw]
+    transliterated_text = "\n".join(transliterated_lines)
 
-    # Handle words that end with "iya":
-    transl_list = [w[:-3]+"ia" if w[-3:] == "iya" else w for w in transl_raw]
-
-    translation = " ".join(transl_list)
-    return translation
+    return transliterated_text
