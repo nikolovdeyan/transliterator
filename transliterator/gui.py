@@ -1,5 +1,5 @@
 """
-A GUI for the transliterator based on PySimpleGUI.
+A GUI for the transliterator tool based on PySimpleGUI.
 """
 import os
 import PySimpleGUI as sg
@@ -7,7 +7,7 @@ import PySimpleGUI as sg
 from transliterator.trans import transliterate
 
 import logging
-logging.basicConfig(level=logging.DEBUG)
+logging.basicConfig(level=logging.INFO)
 
 sg.SetOptions (
     font = ("Helvetica", 11),
@@ -21,7 +21,7 @@ def make_window():
     sg.theme(sg.user_settings_get_entry("theme", None))
     layout = [
         [sg.Menu([["File", ["Theme", "Exit"]], ["Help", "About"],])],
-        [sg.Push(), sg.Text("Transliterator", size=(16,1), font=("Helvetica", 16, "bold")), sg.Push()],
+        [sg.Push(), sg.Text("Transliterator", font=("Helvetica", 16, "bold")), sg.Push()],
         [sg.Text("Place your cyrillic text here and press <Transliterate>")],
         [sg.Multiline(size=(70,12), key="-BG TEXT-", autoscroll=True)],
         [sg.Multiline(size=(70,12), key="-EN TEXT-", autoscroll=True)],
@@ -55,6 +55,6 @@ def main():
                 sg.user_settings_set_entry("theme", vals["-THEME LIST-"])
                 window = make_window()
         if event == "About":
-            sg.popup("Transliterator", "Version: 1.0", "Copyright (c) Deyan Nikolov")
+            sg.popup("Transliterator", "Version: 1.1", "Copyright (c) Deyan Nikolov")
 
     window.close()

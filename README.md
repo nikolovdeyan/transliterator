@@ -9,10 +9,17 @@ Transliteration is a type of conversion of a text from one script to another tha
 
 This tool provides support for most provisions in the law and allows transliteration of multiline texts by keeping all non-Cyrillic symbols and line breaks in place. Special cases such as the name of the country Bulgaria and words ending with -ия are also handled.
 
+#### Features
+- A GUI and console interfaces for performing transliteration.
+- Support for basic transliteration rules as described in Art. 4 of the Transliteration Act.
+- Support for transliteration rules described in Art.5, Art.6, and Art.7 of the Transliteration Act.
+
+Note that no support is provided for the transliteration rules described in Art.9 of the Transliteration Act. 
+
 
 ## Installation
 
-Transliterator only has one dependency ([PySimpleGUI](https://www.pysimplegui.org/en/latest/)), which is only required if the GUI of the program is going to be used. If only the transliteration logic is required, this step could be skipped.
+Transliterator only has one dependency ([PySimpleGUI](https://www.pysimplegui.org/en/latest/)).
 
 To install the requirements in your Virtual Environment:
 ```
@@ -22,20 +29,35 @@ pip install -r requirements.txt
 
 ## Usage
 
-The program can be used directly by importing the trans module or via the provided GUI.
+This program can be used directly by importing the trans module or via the provided GUI.
 
-### Using Transliterator Directly 
+#### Using Transliterator Directly 
 
+``` python
+import transliterator as t
+
+my_text = """
+София, 
+Ловеч, Пазарджик
+Панагюрище,
+България,
+| 1 | 2 |
+| Я | я | 
+| Щ | щ |
+"""
+
+transliterated_text = t.transliterate(my_text)
+
+print(transliterated_text)
 ```
 
-```
 
-
-### Using Transliterator's GUI
+#### Using Transliterator's GUI
 
 
 ```
-
+import transliterator as t
+t.gui()
 ```
 
 
