@@ -63,12 +63,19 @@ def main():
                     sg.Combo(sg.theme_list(), k="-THEME LIST-"),
                     sg.OK(),
                     sg.Cancel()
-                ]]).read(close=True)
+                ]],
+                keep_on_top=True,
+            ).read(close=True)
             if ev == "OK":
                 window.close()
                 sg.user_settings_set_entry("theme", vals["-THEME LIST-"])
                 window = make_window()
         if event == "About":
-            sg.popup("Transliterator", "Version: 1.1", "Copyright (c) Deyan Nikolov")
+            sg.popup(
+                "Transliterator", 
+                "Version: 1.1", 
+                "Copyright (c) Deyan Nikolov",
+                keep_on_top=True,
+            )
 
     window.close()
