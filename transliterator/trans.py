@@ -3,6 +3,7 @@ Main transliterator logic.
 """
 import re
 
+
 def transliterate(text: str) -> str:
     """
     Transliterate a string according to the Bulgarian standard.
@@ -47,7 +48,12 @@ def transliterate(text: str) -> str:
     transliterated_lines = []
     for line in text.splitlines():
         # Handle words that are special cases:
-        transl_raw = [special_cases.get(w) if w in special_cases else w for w in re.split("(\W)", line)]
+        transl_raw = [
+            special_cases.get(w)
+            if w in special_cases
+            else w
+            for w in re.split(r"(\W)", line)
+        ]
         # Translate words in line
         transl_raw = [w.translate(transl_table) for w in transl_raw]
         # Handle words that end with "iya":

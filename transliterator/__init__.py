@@ -1,3 +1,11 @@
+"""
+Transliteration is a type of conversion of a text from one script to another \
+that involves swapping letters (thus trans- + liter-) in predictable ways.
+
+This tool allows for transliteration from Cyrillic to Latin character sets \
+according to the Transliteration Act of 2009.
+"""
+
 __author__ = "Deyan Nikolov"
 __copyright__ = "Copyright 2023"
 __credits__ = []
