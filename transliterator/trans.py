@@ -1,7 +1,7 @@
 """
 Main transliterator logic.
 """
-
+import re
 
 def transliterate(text: str) -> str:
     """
@@ -46,17 +46,13 @@ def transliterate(text: str) -> str:
     # Handle new lines:
     transliterated_lines = []
     for line in text.splitlines():
-        print(f"Raw line {line}")
         # Handle words that are special cases:
-        transl_raw = [special_cases.get(w) if w in special_cases else w for w in line.split()]
-        print(f"transl_raw: {transl_raw}")
+        transl_raw = [special_cases.get(w) if w in special_cases else w for w in re.split("(\W)", line)]
         # Translate words in line
         transl_raw = [w.translate(transl_table) for w in transl_raw]
-        print(f"transl_raw: {transl_raw}")
         # Handle words that end with "iya":
         transl_list = [w[:-3]+"ia" if w[-3:] == "iya" else w for w in transl_raw]
-        print(f"transl_list: {transl_list}")
-        transliterated_lines.append(" ".join(transl_list))
+        transliterated_lines.append("".join(transl_list))
 
     transliterated_text = "\n".join(transliterated_lines)
 

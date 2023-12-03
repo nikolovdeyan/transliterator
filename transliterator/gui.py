@@ -56,9 +56,5 @@ def main():
                 window = make_window()
         if event == "About":
             sg.popup("Transliterator", "Version: 1.0", "Copyright (c) Deyan Nikolov")
-            # ev, vals = sg.Window("About", [[sg.Text("About")],[sg.OK()]]).read(close=True)
-            # if ev == "OK":
-            #     window.close()
-            #     window = make_window()
 
     window.close()
